@@ -1,0 +1,1 @@
+dotnet ef migrations remove --startup-project src/Backend/FullStackShop.API --project src/Backend/FullStackShop.EF

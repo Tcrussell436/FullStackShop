@@ -1,2 +1,7 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
-	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=E3CB7F0F_002D7FBA_002D4C73_002DB1AE_002D6E46610A40B5_002Fd_003Aserver_002Ff_003Atsconfig_002Ejson/@EntryIndexedValue">ExplicitlyExcluded</s:String></wpf:ResourceDictionary>
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=E3CB7F0F_002D7FBA_002D4C73_002DB1AE_002D6E46610A40B5_002Fd_003Aserver_002Ff_003Atsconfig_002Ejson/@EntryIndexedValue">ExplicitlyExcluded</s:String>
+	<s:Boolean x:Key="/Default/UnloadedProject/UnloadedProjects/=0164075a_002Dc864_002D4940_002Da64c_002D4607e1734424_0023FullStackShop_002EDomain/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/UnloadedProject/UnloadedProjects/=5013d23a_002Dfe79_002D4865_002D8293_002De02d9119cf85_0023FullStackShop_002EIdentityServer/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/UnloadedProject/UnloadedProjects/=ad16163b_002D71fa_002D439a_002Da6ad_002De154d10abc08_0023FullStackShop_002EEF/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/UnloadedProject/UnloadedProjects/=cb48d73a_002Da67a_002D4bc8_002Dba0e_002D8714ffebc388_0023FullStackShop_002EAPI/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/UnloadedProject/UnloadedProjects/=e3cb7f0f_002D7fba_002D4c73_002Db1ae_002D6e46610a40b5_0023FullStackShop_002EWeb/@EntryIndexedValue">True</s:Boolean></wpf:ResourceDictionary>
