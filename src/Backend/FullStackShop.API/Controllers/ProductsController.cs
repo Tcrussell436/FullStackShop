@@ -10,10 +10,12 @@ namespace FullStackShop.API.Controllers;
 public class ProductsController : ControllerBase
 {
     private readonly IProductRepository _productRepository;
+    private ILogger<ProductsController> _logger;
 
-    public ProductsController(IProductRepository productRepository)
+    public ProductsController(IProductRepository productRepository, ILogger<ProductsController> logger)
     {
         _productRepository = productRepository;
+        _logger = logger;
     }
 
     [HttpGet]
@@ -29,19 +31,18 @@ public class ProductsController : ControllerBase
 
     [HttpPost]
     [Route("/add")]
-    public Results<Ok<Product>, BadRequest<string>> Add(Product product)
+    public Results<Ok<Product>, BadRequest<string>, ProblemHttpResult> Add(Product product)
     {
         try
         {
-
+            var addProduct = _productRepository.Add(product);
+            
+            return TypedResults.Ok(addProduct);
         }
         catch (Exception e)
         {
-            Console.WriteLine(e);
-            throw;
+            _logger.LogError(e, "Failed to add product: {@Product}", product);
+            return TypedResults.Problem("Something went wrong trying to add the product!");
         }
-        var addProduct = _productRepository.Add(product);
-        
-        return TypedResults.Ok(addProduct);
     }
 }
