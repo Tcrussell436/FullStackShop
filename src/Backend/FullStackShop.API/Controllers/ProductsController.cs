@@ -29,7 +29,7 @@ public class ProductsController : ControllerBase
 
     [HttpPost]
     [Route("/add")]
-    public Results<Created<Product>, BadRequest<string>> Add(Product product)
+    public Results<Ok<Product>, BadRequest<string>> Add(Product product)
     {
         try
         {
@@ -42,5 +42,6 @@ public class ProductsController : ControllerBase
         }
         var addProduct = _productRepository.Add(product);
         
+        return TypedResults.Ok(addProduct);
     }
 }
