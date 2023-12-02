@@ -1,4 +1,6 @@
-﻿using FullStackShop.Domain.Models;
+﻿using System.Collections.Immutable;
+using FullStackShop.API.Controllers.DTO;
+using FullStackShop.Domain.Models;
 using FullStackShop.Domain.Models.Repositories;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
@@ -29,15 +31,31 @@ public class ProductsController : ControllerBase
         return TypedResults.Ok(product);
     }
 
-    [HttpPost]
-    [Route("/add")]
-    public Results<Ok<Product>, BadRequest<string>, ProblemHttpResult> Add(Product product)
+    [HttpGet]
+    [Route("")]
+    public async Task<Results<Ok<IReadOnlyCollection<Product>>, ProblemHttpResult>> AllProducts()
     {
         try
         {
-            var addProduct = _productRepository.Add(product);
-            
-            return TypedResults.Ok(addProduct);
+            var products = await _productRepository.GetAllAsync();
+            return TypedResults.Ok(products);
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e, "Failed to retrieve ");
+            return TypedResults.Problem("Failed to find products!");
+        }
+    }
+
+    [HttpPost]
+    [Route("/add")]
+    public Results<Ok<Product>, BadRequest<string>, ProblemHttpResult> Add(ProductDTO product)
+    {
+        try
+        {
+            var productToAdd = new Product(product.name, product.categoryId, product.description, product.price);
+            var result = _productRepository.Add(productToAdd);
+            return TypedResults.Ok(result);
         }
         catch (Exception e)
         {

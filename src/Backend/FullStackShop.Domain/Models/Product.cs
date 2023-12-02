@@ -22,12 +22,12 @@ public class Product
     private ProductCategory? _category;
 
 
+    // Constructors
     protected Product()
     {
         _name = string.Empty;
     }
     
-    // Constructors
     public Product(string name, int categoryId, string? description = null,
         decimal? price = null)
     {
@@ -37,6 +37,7 @@ public class Product
         _price = price;
     }
 
+    
     public void UpdateCategory(ProductCategory category)
     {
         _category = category;
