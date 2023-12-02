@@ -1,0 +1,22 @@
+﻿services:
+  fullstackshop.api:
+    image: fss.api
+    build:
+      context: .
+      dockerfile: src/Backend/FullStackShop.API/Dockerfile
+    environment:
+      "ASPNETCORE_Environment": Development
+      "ASPNETCORE_Urls": "http://+:9000;https://+:9001"
+      "ASPNETCORE_ConnectionStrings__DefaultConnection": "host=localhost;port=5432;user id=postgres;password=P@ssw0rd"
+      "ASPNETCORE_Kestrel__Certificates__Default__Password": "P@ssw0rd"
+      "ASPNETCORE_Kestrel__Certificates__Default__Path": "./fstapi.pfx"
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    depends_on: 
+      - fullstackshop.db
+  fullstackshop.db:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: "P@ssword"
+  
