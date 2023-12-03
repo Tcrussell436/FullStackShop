@@ -4,15 +4,18 @@ namespace FullStackShop.Domain.Models;
 
 public class User
 {
-    public string Id => _id;
-    public string Email => _email;
-    public DateTime CreatedOn { get; init; }
-
     [MaxLength(256)]
     private string _id;
     [MaxLength(64)]
     private string _email;
+ 
+    
+    public string Id => _id;
+    public string Email => _email;
+    public DateTime CreatedOn { get; init; }
 
+    
+    // Ctor
     protected User()
     {
         _id = string.Empty;
@@ -25,7 +28,8 @@ public class User
         _email = email;
     }
 
-    public void UpdateEmail(string email)
+    
+    public void SetEmail(string email)
     {
         _email = email;
     }

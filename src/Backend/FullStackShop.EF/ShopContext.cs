@@ -5,13 +5,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FullStackShop.EF;
 
-public class ApplicationDbContext : DbContext, IUnitOfWork
+public class ShopContext : DbContext, IUnitOfWork
 {
     public DbSet<Product> Products => Set<Product>();
     public DbSet<ProductCategory> ProductsCategories => Set<ProductCategory>();
     public DbSet<User> Users => Set<User>();
     
-    public ApplicationDbContext(DbContextOptions options) : base(options)
+    public ShopContext(DbContextOptions options) : base(options)
     { }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

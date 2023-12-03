@@ -22,12 +22,12 @@ try
 
     // this seeding is only for the template to bootstrap the DB and users.
     // in production you will likely want a different approach.
-    if (args.Contains("/seed"))
+    //if (args.Contains("/seed"))
+    if (builder.Environment.IsDevelopment()) // Will always seed in development for demo purposes
     {
         Log.Information("Seeding database...");
         SeedData.EnsureSeedData(app);
-        Log.Information("Done seeding database. Exiting.");
-        return;
+        Log.Information("Done seeding database...");
     }
 
     app.Run();

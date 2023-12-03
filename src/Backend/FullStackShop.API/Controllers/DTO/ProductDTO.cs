@@ -1,10 +1,11 @@
 ﻿namespace FullStackShop.API.Controllers.DTO;
 
-public record ProductDTO
+public record ProductDTO(
+    int? id,
+    string name,
+    string? description,
+    decimal? price,
+    int categoryId
+    )
 {
-    public int id { get; init; }
-    public string name { get; init; }
-    public string? description { get; init; }
-    public decimal? price { get; init; }
-    public int categoryId { get; init; }
 }

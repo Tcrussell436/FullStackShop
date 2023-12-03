@@ -30,23 +30,17 @@ internal static class HostingExtensions
             })
             .AddTestUsers(TestUsers.Users)
             // this adds the config data from DB (clients, resources, CORS)
-            .AddConfigurationStore(options =>
-            {
-                options.ConfigureDbContext = b =>
-                    b.UseSqlite(connectionString, dbOpts => dbOpts.MigrationsAssembly(typeof(Program).Assembly.FullName));
-            })
+            .AddConfigurationStore(options => options.ConfigureDbContext = b => b.UseNpgsql(connectionString,
+                dbOpts => dbOpts.MigrationsAssembly(typeof(Program).Assembly.FullName)))
             // this is something you will want in production to reduce load on and requests to the DB
             //.AddConfigurationStoreCache()
             //
             // this adds the operational data from DB (codes, tokens, consents)
-            .AddOperationalStore(options =>
-            {
-                options.ConfigureDbContext = b =>
-                    b.UseSqlite(connectionString, dbOpts => dbOpts.MigrationsAssembly(typeof(Program).Assembly.FullName));
-            });
+            .AddOperationalStore(options => options.ConfigureDbContext = b =>
+                b.UseNpgsql(connectionString, dbOpts => dbOpts.MigrationsAssembly(typeof(Program).Assembly.FullName)));
 
         builder.Services.AddAuthentication()
-            .AddGoogle(options =>
+            /*.AddGoogle(options =>
             {
                 options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
 
@@ -55,7 +49,7 @@ internal static class HostingExtensions
                 // set the redirect URI to https://localhost:5001/signin-google
                 options.ClientId = "copy client ID from Google here";
                 options.ClientSecret = "copy client secret from Google here";
-            });
+            })*/;
 
 
         // this adds the necessary config for the simple admin/config pages
@@ -81,6 +75,8 @@ internal static class HostingExtensions
         // and put some authorization on the admin/management pages using the same policy created above
         //builder.Services.Configure<RazorPagesOptions>(options =>
         //    options.Conventions.AuthorizeFolder("/ServerSideSessions", "admin"));
+
+        builder.Services.AddEndpointsApiExplorer();
 
         return builder.Build();
     }

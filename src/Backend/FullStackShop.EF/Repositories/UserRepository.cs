@@ -9,9 +9,9 @@ public class UserRepository : IUserRepository
 {
     public IUnitOfWork UnitOfWork => _context;
     
-    private readonly ApplicationDbContext _context;
+    private readonly ShopContext _context;
 
-    public UserRepository(ApplicationDbContext context)
+    public UserRepository(ShopContext context)
     {
         _context = context ?? throw new ArgumentNullException(nameof(context));
     }

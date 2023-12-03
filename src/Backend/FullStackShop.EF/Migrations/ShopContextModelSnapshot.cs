@@ -3,7 +3,6 @@ using System;
 using FullStackShop.EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,12 +10,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace FullStackShop.EF.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231129211743_Initial")]
-    partial class Initial
+    [DbContext(typeof(ShopContext))]
+    partial class ShopContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -85,7 +82,7 @@ namespace FullStackShop.EF.Migrations
                         .HasColumnName("_id");
 
                     b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime")
+                        .HasColumnType("timestamp")
                         .HasColumnName("created_on");
 
                     b.Property<string>("_email")

@@ -29,7 +29,7 @@ namespace FullStackShop.EF.Migrations
                 columns: table => new
                 {
                     _id = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: false),
-                    created_on = table.Column<DateTime>(type: "datetime", nullable: false),
+                    created_on = table.Column<DateTime>(type: "timestamp", nullable: false),
                     _email = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: false)
                 },
                 constraints: table =>

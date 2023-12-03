@@ -16,7 +16,7 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
             .IsRequired();
 
         builder.Property(u => u.CreatedOn)
-            .HasColumnType("datetime")
+            .HasColumnType("timestamp")
             .IsRequired();
 
         builder.Property<string>("_email")

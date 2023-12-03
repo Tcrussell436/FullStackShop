@@ -10,9 +10,9 @@ public class ProductRepository : IProductRepository
 {
     public IUnitOfWork UnitOfWork => _context;
     
-    private readonly ApplicationDbContext _context;
+    private readonly ShopContext _context;
 
-    public ProductRepository(ApplicationDbContext context)
+    public ProductRepository(ShopContext context)
     {
         _context = context ?? throw new ArgumentNullException(nameof(context));
     }

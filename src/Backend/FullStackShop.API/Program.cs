@@ -1,4 +1,6 @@
+using FullStackShop.API;
 using FullStackShop.EF;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,6 +28,13 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    
+    // Will migrate in development for demo purposes
+    using (var scope = app.Services.CreateScope())
+    {
+        var dbContext = scope.ServiceProvider.GetRequiredService<ShopContext>();
+        SeedData.AddFssSeedData(dbContext);
+    }
 }
 
 app.UseHttpsRedirection();

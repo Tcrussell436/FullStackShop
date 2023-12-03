@@ -1,6 +1,0 @@
-@FullStackShop.API_HostAddress = http://localhost:5133
-
-GET {{FullStackShop.API_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###

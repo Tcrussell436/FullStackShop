@@ -8,7 +8,7 @@
       <NavSide />
     </div>
     <main>
-
+      Test 1
     </main>
   </div>
 </template>

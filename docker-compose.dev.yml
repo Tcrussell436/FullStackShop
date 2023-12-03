@@ -1,21 +1,30 @@
-﻿services:
+﻿#Volumes
+volumes:
+  node_modules:
+    
+services:
+  
   fullstackshop.nuxt:
     image: fss.nuxt
     build:
-      context: .
-      dockerfile: src/Frontend/FullStackShop.Web/Dockerfile
+      context: ./src/Frontend/FullStackShop.Web
+      dockerfile: Dockerfile
     ports:
       - "7000:7000"
       - "24678:24678" #For Vite hot module reloading
     volumes:
-      - .:/src
+      - ./src/Frontend/FullStackShop.Web/:/src
       - node_modules:/src/node_modules
+    labels:
+      com.jetbrains.rider.debug: "false"
+      com.jetbrains.rider.fast.mode: "false"
   
+  # Application API
   fullstackshop.api:
     image: fss.api
     build:
-      context: .
-      dockerfile: src/Backend/FullStackShop.API/Dockerfile
+      context: ./src/Backend/FullStackShop.API
+      dockerfile: Dockerfile
     environment:
       "ASPNETCORE_Environment": Development
       "ASPNETCORE_Urls": "http://+:9000;https://+:9001"
@@ -27,14 +36,17 @@
       - "9001:9001"
     depends_on: 
       - fullstackshop.db
+  
+  # IdentityServer
   fullstackshop.identity:
     image: fss.is
     build:
-      context: .
-      dockerfile: src/IdentityServer/FullStackShop.IdentityServer/Dockerfile
+      context: ./src/IdentityServer/FullStackShop.IdentityServer
+      dockerfile: Dockerfile
     environment:
       "ASPNETCORE_Environment": Development
       "ASPNETCORE_Urls": "https://+:9999"
+      "ASPNETCORE_HTTPS_PORT": 9999
       "ASPNETCORE_ConnectionStrings__DefaultConnection": "host=fullstackshop.db;port=5432;user id=postgres;database=identity;password=P4ssw0rd"
       "ASPNETCORE_Kestrel__Certificates__Default__Password": "P@ssw0rd"
       "ASPNETCORE_Kestrel__Certificates__Default__Path": "./fssidentity.pfx"
@@ -43,6 +55,7 @@
     depends_on:
       - fullstackshop.db
   
+  #Database
   fullstackshop.db:
     image: postgres
     restart: always
@@ -51,14 +64,14 @@
     ports:
       - "5432:5432"
   
+  #Database Admin
   adminer:
     image: adminer
     restart: always
     ports:
       - 8080:8080
+        
   
-  fullstackshop.api-1:
-    image: fullstackshop.api-1
-    build:
-      context: .
-      dockerfile: src/Backend/FullStackShop.API/Dockerfile
+
+  
+  
