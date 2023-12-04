@@ -26,5 +26,6 @@
     <ItemGroup>
       <ProjectReference Include="..\FullStackShop.EF\FullStackShop.EF.csproj" />
     </ItemGroup>
+    
 
 </Project>

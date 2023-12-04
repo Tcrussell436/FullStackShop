@@ -3,17 +3,25 @@ volumes:
   node_modules:
     
 services:
+  #Database
+  fullstackshop.db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: P4ssw0rd
+    ports:
+      - "5432:5432"
   
   fullstackshop.nuxt:
     image: fss.nuxt
     build:
-      context: ./src/Frontend/FullStackShop.Web
+      context: src/Frontend/FullStackShop.Web
       dockerfile: Dockerfile
     ports:
       - "7000:7000"
       - "24678:24678" #For Vite hot module reloading
     volumes:
-      - ./src/Frontend/FullStackShop.Web/:/src
+      - ./src/Frontend/FullStackShop.Web:/src
       - node_modules:/src/node_modules
     labels:
       com.jetbrains.rider.debug: "false"
@@ -23,8 +31,8 @@ services:
   fullstackshop.api:
     image: fss.api
     build:
-      context: ./src/Backend/FullStackShop.API
-      dockerfile: Dockerfile
+      context: ./src/Backend
+      dockerfile: FullStackShop.API/Dockerfile
     environment:
       "ASPNETCORE_Environment": Development
       "ASPNETCORE_Urls": "http://+:9000;https://+:9001"
@@ -37,12 +45,12 @@ services:
     depends_on: 
       - fullstackshop.db
   
-  # IdentityServer
+  # IdentityServer 
   fullstackshop.identity:
     image: fss.is
     build:
-      context: ./src/IdentityServer/FullStackShop.IdentityServer
-      dockerfile: Dockerfile
+      context: ./src/IdentityServer
+      dockerfile: FullStackShop.IdentityServer/Dockerfile
     environment:
       "ASPNETCORE_Environment": Development
       "ASPNETCORE_Urls": "https://+:9999"
@@ -55,14 +63,7 @@ services:
     depends_on:
       - fullstackshop.db
   
-  #Database
-  fullstackshop.db:
-    image: postgres
-    restart: always
-    environment:
-      POSTGRES_PASSWORD: P4ssw0rd
-    ports:
-      - "5432:5432"
+  
   
   #Database Admin
   adminer:

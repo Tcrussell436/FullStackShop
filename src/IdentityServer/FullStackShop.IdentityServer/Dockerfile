@@ -13,6 +13,7 @@ RUN dotnet build "FullStackShop.IdentityServer.csproj" -c $BUILD_CONFIGURATION -
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
 RUN dotnet publish "FullStackShop.IdentityServer.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+COPY FullStackShop.IdentityServer/fssidentity.pfx /app/publish
 
 FROM base AS final
 WORKDIR /app
