@@ -3,11 +3,23 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   devServer: {
     https: true,
-    port: 7000
+    port: 7000,
+    url: "https://+:7000"
   },
   modules: [
+    '@sidebase/nuxt-auth',
     'nuxt-primevue'
   ],
+  typescript: {
+    shim: false
+  },
+  auth: {
+    isEnabled: true,
+    baseURL: "https://fullstackshop.identityserver:9999/",
+    provider: {
+      type: 'authjs',
+    }
+  },
   css: [
     'primeflex/primeflex.min.css',
     'primeicons/primeicons.css',

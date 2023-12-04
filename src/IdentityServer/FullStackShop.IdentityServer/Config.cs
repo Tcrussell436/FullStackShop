@@ -22,32 +22,23 @@ public static class Config
     public static IEnumerable<Client> Clients =>
         new Client[]
         {
-            // ** Won't need an m2m client
-            // m2m client credentials flow client
-            /*new Client
-            {
-                ClientId = "m2m.client",
-                ClientName = "Client Credentials Client",
-
-                AllowedGrantTypes = GrantTypes.ClientCredentials,
-                ClientSecrets = { new Secret("511536EF-F270-4058-80CA-1C89C192F69A".Sha256()) },
-
-                AllowedScopes = { "scope1" }
-            },*/
-            
             // interactive client using code flow + pkce
             new Client
             {
-                ClientId = "interactive",
+                ClientId = "fss-nuxt",
                 // TODO: Default secret, could generate Guid or provide secret from external source
                 ClientSecrets = { new Secret("49C1A7E1-0C79-4A89-A3D6-A37998FB86B0".Sha256()) },
 
                 AllowedGrantTypes = GrantTypes.Code,
 
-                RedirectUris = { "https://fullstackshop.api:8181/signin-oidc" },
-                FrontChannelLogoutUri = "https://fullstackshop.api:8181/signout-oidc",
-                PostLogoutRedirectUris = { "https://fullstackshop.api:8181/signout-callback-oidc" },
-
+                RedirectUris =
+                {
+                    "https://fullstackshop.nuxt:7000/signin-callback",
+                    "https://fullstackshop.nuxt:7000/"
+                },
+                FrontChannelLogoutUri = "https://fullstackshop.nuxt:7000/signout-oidc",
+                PostLogoutRedirectUris = { "https://fullstackshop.nuxt:7000/" },
+                AllowedCorsOrigins = new [] { "https://fullstackshop.nuxt:7000" },
                 AllowOfflineAccess = true,
                 AllowedScopes = { "openid", "profile", "email" }
             },
