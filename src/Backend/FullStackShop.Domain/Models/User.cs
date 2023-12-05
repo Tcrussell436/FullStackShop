@@ -1,36 +1,16 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Identity;
 
 namespace FullStackShop.Domain.Models;
 
-public class User
+/// <summary>
+/// Override IdentityUser class to add properties
+/// </summary>
+public class User : IdentityUser
 {
-    [MaxLength(256)]
-    private string _id;
-    [MaxLength(64)]
-    private string _email;
- 
     
-    public string Id => _id;
-    public string Email => _email;
-    public DateTime CreatedOn { get; init; }
-
+    public User() : base()
+    { }
     
-    // Ctor
-    protected User()
-    {
-        _id = string.Empty;
-        _email = string.Empty;
-    }
-    
-    public User(string id, string email)
-    {
-        _id = id;
-        _email = email;
-    }
-
-    
-    public void SetEmail(string email)
-    {
-        _email = email;
-    }
+    public User(string userName) : base(userName)
+    { }
 }

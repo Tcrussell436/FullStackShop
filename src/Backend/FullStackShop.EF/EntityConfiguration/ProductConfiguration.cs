@@ -13,18 +13,18 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
         builder.Property(p => p.Id)
             .ValueGeneratedOnAdd();
         
-        builder.Property<decimal?>("_price")
+        builder.Property(p => p.Price)
             .HasColumnType("decimal(5,2)");
 
-        builder.Property<string>("_name")
+        builder.Property<string>(p => p.Name)
             .HasMaxLength(64)
             .IsRequired();
 
-        builder.Property<string?>("_description")
+        builder.Property<string?>(p => p.Description)
             .HasMaxLength(2048)
             .IsRequired(false);
 
-        builder.HasOne<ProductCategory>("_category")
+        builder.HasOne(p => p.Category)
             .WithMany()
             .HasForeignKey("_categoryId")
             .IsRequired();
@@ -40,7 +40,7 @@ public class ProductCategoryConfiguration : IEntityTypeConfiguration<ProductCate
         builder.Property(p => p.Id)
             .ValueGeneratedOnAdd();
 
-        builder.Property<string>("_name")
+        builder.Property(pc => pc.Name)
             .HasMaxLength(32)
             .IsRequired();
     }

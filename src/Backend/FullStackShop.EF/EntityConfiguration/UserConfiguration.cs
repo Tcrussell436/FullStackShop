@@ -8,19 +8,6 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
 {
     public void Configure(EntityTypeBuilder<User> builder)
     {
-        builder.HasKey("_id");
-
-        builder.Property<string>("_id")
-            .HasMaxLength(256)
-            .ValueGeneratedNever()
-            .IsRequired();
-
-        builder.Property(u => u.CreatedOn)
-            .HasColumnType("timestamp")
-            .IsRequired();
-
-        builder.Property<string>("_email")
-            .HasMaxLength(64)
-            .IsRequired();
+        
     }
 }

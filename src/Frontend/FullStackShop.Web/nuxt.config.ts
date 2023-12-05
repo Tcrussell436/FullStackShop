@@ -15,7 +15,6 @@ export default defineNuxtConfig({
   },
   auth: {
     isEnabled: true,
-    baseURL: "https://fullstackshop.identityserver:9999/",
     provider: {
       type: 'authjs',
     }

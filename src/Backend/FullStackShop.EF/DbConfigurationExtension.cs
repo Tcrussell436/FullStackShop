@@ -16,7 +16,6 @@ public static class DbConfigurationExtension
             // to snake case, this greatly simplifies manual queries since postgres is case-sensitive
             options.UseNpgsql(cs)
                 .UseSnakeCaseNamingConvention();
-
         });
         
 

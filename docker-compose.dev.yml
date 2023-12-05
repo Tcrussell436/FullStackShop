@@ -12,6 +12,7 @@ services:
     ports:
       - "5432:5432"
   
+  #Nuxt Frontend
   fullstackshop.nuxt:
     image: fss.nuxt
     build:
@@ -44,25 +45,6 @@ services:
       - "9001:9001"
     depends_on: 
       - fullstackshop.db
-  
-  # IdentityServer 
-  fullstackshop.identity:
-    image: fss.is
-    build:
-      context: ./src/IdentityServer
-      dockerfile: FullStackShop.IdentityServer/Dockerfile
-    environment:
-      "ASPNETCORE_Environment": Development
-      "ASPNETCORE_Urls": "https://+:9999;http://+:9090"
-      "ASPNETCORE_HTTPS_PORT": 9999
-      "ASPNETCORE_ConnectionStrings__DefaultConnection": "host=fullstackshop.db;port=5432;user id=postgres;database=identity;password=P4ssw0rd"
-      "ASPNETCORE_Kestrel__Certificates__Default__Password": "P@ssw0rd"
-      "ASPNETCORE_Kestrel__Certificates__Default__Path": "./fssidentity.pfx"
-    ports:
-      - "9999:9999"
-    depends_on:
-      - fullstackshop.db
-  
   
   
   #Database Admin
